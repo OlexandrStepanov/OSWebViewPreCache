@@ -32,6 +32,7 @@ static NSMutableSet *_webViewPreCacherGlobalPool = nil;
 @property (nonatomic, copy) NSURLRequest *webViewRequest;
 
 @property (nonatomic, strong) UIWebView* backgroundWebView;
+@property (nonatomic) BOOL secondWebViewLoading;
 
 @property (nonatomic) int webViewLoadsCounter;
 @property (nonatomic) int numberOfReloadTries;
@@ -70,7 +71,6 @@ static NSMutableSet *_webViewPreCacherGlobalPool = nil;
     {
         [preCacher.webView stopLoading];
         [preCacher.backgroundWebView stopLoading];
-        preCacher.webView.delegate = preCacher.originalWebViewDelegate;
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         [preCacher purgeSelf];
     }
@@ -187,7 +187,6 @@ static NSMutableSet *_webViewPreCacherGlobalPool = nil;
         if ([self.originalWebViewDelegate respondsToSelector:@selector(webView:didFailLoadWithError:)]) {
             [self.originalWebViewDelegate webView:webView didFailLoadWithError:error];
         }
-        self.webView.delegate = self.originalWebViewDelegate;
     }
     
     [self purgeSelf];
@@ -209,11 +208,10 @@ static NSMutableSet *_webViewPreCacherGlobalPool = nil;
         
         if (webView == self.webView)
         {
-            self.webView.delegate = self.originalWebViewDelegate;
-            
             //  Create background web view, and start loading without using cache.
             //  But only if web view was loaded from cache
-            if (self.webViewRequest.cachePolicy == NSURLRequestReturnCacheDataDontLoad)
+            if (self.webViewRequest.cachePolicy == NSURLRequestReturnCacheDataDontLoad &&
+                !self.secondWebViewLoading)
             {
                 id __weak weakSelf = self;
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kBackgroundWebViewStartLoadInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -237,13 +235,38 @@ static NSMutableSet *_webViewPreCacherGlobalPool = nil;
         {
             self.backgroundWebView = nil;
             NSLog(@"FINISHED: cache was updated: %d", [[OSURLCache sharedInstance] cacheWasUpdated]);
-            [self purgeSelf];
+            
+            //  Ask for reload only in case if cache updated
+            if ([[OSURLCache sharedInstance] cacheWasUpdated] &&
+                self.pageReloadRequired)
+            {
+                id __weak weakSelf = self;
+                self.pageReloadRequired(self.webView, ^(BOOL reloadFlag) {
+                    if (reloadFlag)
+                    {
+                        OSWebViewPreCacher *strongSelf = weakSelf;
+                        NSURLRequest *request = [NSURLRequest requestWithURL:strongSelf.webViewRequest.URL cachePolicy:NSURLRequestReturnCacheDataDontLoad timeoutInterval:kWebViewTimeoutIntervalWithCache];
+                        strongSelf.secondWebViewLoading = YES;
+                        [strongSelf.webView loadRequest:request];
+                        //  Purge will happen when web load finished
+                    }
+                    else
+                    {
+                        [self purgeSelf];
+                    }
+                });
+            }
+            else
+            {
+                [self purgeSelf];
+            }
         }
     }
 }
 
 - (void)purgeSelf
 {
+    self.webView.delegate = self.originalWebViewDelegate;
     [[OSURLCache sharedInstance] disableCache];
     [_webViewPreCacherGlobalPool removeObject:self];
 }

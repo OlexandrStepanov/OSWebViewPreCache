@@ -34,6 +34,7 @@
     else if ([segue.identifier isEqualToString:@"dynamic"])
     {
         webScreen.urlToLoad = [NSURL URLWithString:@"http://time.is/UTC"];
+        webScreen.reloadEnabled = YES;
     }
 }
 

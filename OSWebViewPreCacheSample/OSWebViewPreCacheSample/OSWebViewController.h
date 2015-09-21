@@ -11,6 +11,7 @@
 @interface OSWebViewController : UIViewController
 
 @property (nonatomic, strong) NSURL *urlToLoad;
+@property (nonatomic) BOOL reloadEnabled;
 
 @end
 

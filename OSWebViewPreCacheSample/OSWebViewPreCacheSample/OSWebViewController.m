@@ -9,6 +9,7 @@
 #import "OSWebViewController.h"
 #import "UIWebView+PreCache.h"
 #import "OSURLCache.h"
+#import "UIAlertController+Blocks.h"
 
 @interface OSWebViewController () <UIWebViewDelegate>
 
@@ -38,7 +39,25 @@
     if (self.urlToLoad)
     {
         [self.loadingWheel startAnimating];
-        [self.webView loadUrlUsingCache:self.urlToLoad];
+        if (self.reloadEnabled)
+        {
+            [self.webView loadUrlUsingCache:self.urlToLoad withReloadRequiredBlock:^(UIWebView *webView, UIWebViewPreCacheReloadResultBlock resultBlock) {
+                [UIAlertController showAlertInViewController:self
+                                                   withTitle:NSLocalizedString(@"New version", nil)
+                                                     message:NSLocalizedString(@"There is a new version of this page available, do you want to reload it?", nil)
+                                           cancelButtonTitle:NSLocalizedString(@"No", nil)
+                                      destructiveButtonTitle:nil
+                                           otherButtonTitles:@[NSLocalizedString(@"Yes", nil)]
+                                                    tapBlock:
+                 ^(UIAlertController * _Nonnull controller, UIAlertAction * _Nonnull action, NSInteger buttonIndex) {
+                    resultBlock(action.style != UIAlertActionStyleCancel);
+                }];
+            }];
+        }
+        else
+        {
+            [self.webView loadUrlUsingCache:self.urlToLoad];
+        }
     }
 }
 

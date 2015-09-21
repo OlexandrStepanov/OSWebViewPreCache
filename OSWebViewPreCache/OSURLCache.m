@@ -173,7 +173,7 @@
             self.cacheWasUpdated = YES;
         }
     }
-    //  If data exist in pre cache - write it the the cache path, and compare data with pre cached
+    //  If data exist in pre cache - write it to the cache path, and compare data with pre cached
     else if ([[NSFileManager defaultManager] fileExistsAtPath:storagePathPrecache])
     {
         [self writeData:cachedResponse.data toCachePath:storagePathCache];
