@@ -14,7 +14,10 @@
 #define kReloadNumberOfTries 2
 #define kReloadTimeInterval 1.0
 #define kWebViewDidReallyFinishLoadInterval 1.0
-#define kBackgroundWebViewStartLoadInterval 1.0
+#define kBackgroundWebViewStartLoadInterval 0.5
+
+#define kWebViewTimeoutIntervalWithCache 10
+#define kWebViewTimeoutIntervalWithoutCache 30
 
 
 
@@ -68,6 +71,7 @@ static NSMutableSet *_webViewPreCacherGlobalPool = nil;
         [preCacher.webView stopLoading];
         [preCacher.backgroundWebView stopLoading];
         preCacher.webView.delegate = preCacher.originalWebViewDelegate;
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         [preCacher purgeSelf];
     }
 }
@@ -97,12 +101,12 @@ static NSMutableSet *_webViewPreCacherGlobalPool = nil;
     //  If we have precached data - load only from cache
     if ([[OSURLCache sharedInstance] hasPrecacheDataForURL:requestURL])
     {
-        request = [NSURLRequest requestWithURL:requestURL cachePolicy:NSURLRequestReturnCacheDataDontLoad timeoutInterval:10];
+        request = [NSURLRequest requestWithURL:requestURL cachePolicy:NSURLRequestReturnCacheDataDontLoad timeoutInterval:kWebViewTimeoutIntervalWithCache];
     }
     //  No precache - load request without using cache, because it should be created
     else
     {
-        request = [NSURLRequest requestWithURL:requestURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30];
+        request = [NSURLRequest requestWithURL:requestURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:kWebViewTimeoutIntervalWithoutCache];
     }
     self.webViewRequest = request;
     [self.webView loadRequest:self.webViewRequest];
@@ -216,7 +220,7 @@ static NSMutableSet *_webViewPreCacherGlobalPool = nil;
                     OSWebViewPreCacher *strongSelf = weakSelf;
                     if (strongSelf)
                     {
-                        NSURLRequest *request = [NSURLRequest requestWithURL:strongSelf.webViewRequest.URL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30];
+                        NSURLRequest *request = [NSURLRequest requestWithURL:strongSelf.webViewRequest.URL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:kWebViewTimeoutIntervalWithoutCache];
                         strongSelf.backgroundWebView = [[UIWebView alloc] initWithFrame:strongSelf.webView.bounds];
                         strongSelf.backgroundWebView.delegate = self;
                         [strongSelf.backgroundWebView loadRequest:request];
