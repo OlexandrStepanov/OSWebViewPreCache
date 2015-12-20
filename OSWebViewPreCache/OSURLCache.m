@@ -33,6 +33,18 @@
 
 @implementation OSURLCache
 
++ (void)load
+{
+    /*  Next trick is required to make OSURLCache wokring properly.
+        The problem behind, is that cachedResponseForRequest: method is not being called if this class is not instantiated on the app startup
+         More info about this bug/feature of NSURLCache can be found here: http://stackoverflow.com/q/25853470
+     */
+    [[self sharedInstance] enableCache];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[self sharedInstance] disableCache];
+    });
+}
+
 +(instancetype)sharedInstance
 {
     static dispatch_once_t once;

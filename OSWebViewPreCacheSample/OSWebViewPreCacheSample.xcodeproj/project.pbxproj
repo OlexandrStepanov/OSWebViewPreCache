@@ -17,7 +17,7 @@
 		DB13A4C91B964FCE00B6BB83 /* OSWebViewPreCacher.m in Sources */ = {isa = PBXBuildFile; fileRef = DB13A4C41B964FCE00B6BB83 /* OSWebViewPreCacher.m */; };
 		DB13A4CA1B964FCE00B6BB83 /* OSURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = DB13A4C61B964FCE00B6BB83 /* OSURLCache.m */; };
 		DB13A4CB1B964FCE00B6BB83 /* UIWebView+PreCache.m in Sources */ = {isa = PBXBuildFile; fileRef = DB13A4C81B964FCE00B6BB83 /* UIWebView+PreCache.m */; };
-		DB93A3901BB0549100C7B8D9 /* OSURLTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB93A38F1BB0549100C7B8D9 /* OSURLTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		DB93A3901BB0549100C7B8D9 /* OSURLTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB93A38F1BB0549100C7B8D9 /* OSURLTableViewController.m */; };
 		FF9E6A1321696BE853F4D0BA /* libPods-OSWebViewPreCacheSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E727B449345560E3F356830 /* libPods-OSWebViewPreCacheSample.a */; };
 /* End PBXBuildFile section */
 
@@ -184,6 +184,7 @@
 				DB13A4961B964FC500B6BB83 /* Frameworks */,
 				DB13A4971B964FC500B6BB83 /* Resources */,
 				CFCA4E7A8E010B1E9A2AB693 /* Copy Pods Resources */,
+				0F3546352EF29C4D19C1C827 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -271,6 +272,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0F3546352EF29C4D19C1C827 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-OSWebViewPreCacheSample/Pods-OSWebViewPreCacheSample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		CFCA4E7A8E010B1E9A2AB693 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

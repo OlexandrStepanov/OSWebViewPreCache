@@ -91,7 +91,10 @@ static NSMutableSet *_webViewPreCacherGlobalPool = nil;
     self.startLoadingTime = [NSDate date];
     self.webViewLoadsCounter = 0;
     
-    self.originalWebViewDelegate = self.webView.delegate;
+    if (self.originalWebViewDelegate == nil)
+    {
+        self.originalWebViewDelegate = self.webView.delegate;
+    }
     self.webView.delegate = self;
     
     //  We enable the cache to load the cached version
@@ -101,7 +104,7 @@ static NSMutableSet *_webViewPreCacherGlobalPool = nil;
     //  If we have precached data - load only from cache
     if ([[OSURLCache sharedInstance] hasPrecacheDataForURL:requestURL])
     {
-        request = [NSURLRequest requestWithURL:requestURL cachePolicy:NSURLRequestReturnCacheDataDontLoad timeoutInterval:kWebViewTimeoutIntervalWithCache];
+        request = [NSURLRequest requestWithURL:requestURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:kWebViewTimeoutIntervalWithCache];
     }
     //  No precache - load request without using cache, because it should be created
     else
@@ -210,7 +213,7 @@ static NSMutableSet *_webViewPreCacherGlobalPool = nil;
         {
             //  Create background web view, and start loading without using cache.
             //  But only if web view was loaded from cache
-            if (self.webViewRequest.cachePolicy == NSURLRequestReturnCacheDataDontLoad &&
+            if (self.webViewRequest.cachePolicy == NSURLRequestReturnCacheDataElseLoad &&
                 !self.secondWebViewLoading)
             {
                 id __weak weakSelf = self;
@@ -245,7 +248,7 @@ static NSMutableSet *_webViewPreCacherGlobalPool = nil;
                     if (reloadFlag)
                     {
                         OSWebViewPreCacher *strongSelf = weakSelf;
-                        NSURLRequest *request = [NSURLRequest requestWithURL:strongSelf.webViewRequest.URL cachePolicy:NSURLRequestReturnCacheDataDontLoad timeoutInterval:kWebViewTimeoutIntervalWithCache];
+                        NSURLRequest *request = [NSURLRequest requestWithURL:strongSelf.webViewRequest.URL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:kWebViewTimeoutIntervalWithCache];
                         strongSelf.secondWebViewLoading = YES;
                         [strongSelf.webView loadRequest:request];
                         //  Purge will happen when web load finished
