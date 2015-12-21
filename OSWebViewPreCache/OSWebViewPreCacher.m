@@ -5,7 +5,7 @@
 //  Copyright (c) 2015 Oleksandr Stepanov. All rights reserved.
 //
 
-#import <AFNetworking.h>
+#import <Reachability/Reachability.h>
 
 #import "OSWebViewPreCacher.h"
 #import "OSURLCache.h"
@@ -167,7 +167,7 @@ static NSMutableSet *_webViewPreCacherGlobalPool = nil;
     //  In some cases, when device just moved to airplane mode for example, web view fails to load request
     //  In this case we have to try again after some delay.
     if (webView == self.webView &&
-        [AFNetworkReachabilityManager sharedManager].isReachable &&
+        [Reachability reachabilityForInternetConnection].isReachable &&
         self.numberOfReloadTries < kReloadNumberOfTries)
     {
         self.numberOfReloadTries++;
