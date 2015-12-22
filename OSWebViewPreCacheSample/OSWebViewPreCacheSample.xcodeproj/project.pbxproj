@@ -18,6 +18,7 @@
 		DB13A4CA1B964FCE00B6BB83 /* OSURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = DB13A4C61B964FCE00B6BB83 /* OSURLCache.m */; };
 		DB13A4CB1B964FCE00B6BB83 /* UIWebView+PreCache.m in Sources */ = {isa = PBXBuildFile; fileRef = DB13A4C81B964FCE00B6BB83 /* UIWebView+PreCache.m */; };
 		DB93A3901BB0549100C7B8D9 /* OSURLTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB93A38F1BB0549100C7B8D9 /* OSURLTableViewController.m */; };
+		DBD2BC9F1C295E3E00E09BB1 /* WebCache in Resources */ = {isa = PBXBuildFile; fileRef = DBD2BC9E1C295E3E00E09BB1 /* WebCache */; };
 		FF9E6A1321696BE853F4D0BA /* libPods-OSWebViewPreCacheSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E727B449345560E3F356830 /* libPods-OSWebViewPreCacheSample.a */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		DB13A4C81B964FCE00B6BB83 /* UIWebView+PreCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+PreCache.m"; sourceTree = "<group>"; };
 		DB93A38E1BB0549100C7B8D9 /* OSURLTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSURLTableViewController.h; sourceTree = "<group>"; };
 		DB93A38F1BB0549100C7B8D9 /* OSURLTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSURLTableViewController.m; sourceTree = "<group>"; };
+		DBD2BC9E1C295E3E00E09BB1 /* WebCache */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WebCache; sourceTree = "<group>"; };
 		E3C7A5EDE21837F81F1B0A50 /* Pods-OSWebViewPreCacheSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OSWebViewPreCacheSample.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-OSWebViewPreCacheSample/Pods-OSWebViewPreCacheSample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +129,7 @@
 				DB13A4A61B964FC500B6BB83 /* Main.storyboard */,
 				DB13A4A91B964FC500B6BB83 /* Images.xcassets */,
 				DB13A4AB1B964FC500B6BB83 /* LaunchScreen.xib */,
+				DBD2BC9E1C295E3E00E09BB1 /* WebCache */,
 				DB13A49C1B964FC500B6BB83 /* Supporting Files */,
 			);
 			path = OSWebViewPreCacheSample;
@@ -258,6 +261,7 @@
 			files = (
 				DB13A4A81B964FC500B6BB83 /* Main.storyboard in Resources */,
 				DB13A4AD1B964FC500B6BB83 /* LaunchScreen.xib in Resources */,
+				DBD2BC9F1C295E3E00E09BB1 /* WebCache in Resources */,
 				DB13A4AA1B964FC500B6BB83 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
