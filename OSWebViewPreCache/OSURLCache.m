@@ -9,6 +9,9 @@
 
 #import "OSURLCache.h"
 
+#if !LOG_VERBOSE
+    #define NSLog(...)
+#endif
 
 #define PRE_CACHE_FOLDER @"WebCache"  // The folder in your app with the prefilled cache content
 #define MAX_MEMORY_CAPACITY_MB 5

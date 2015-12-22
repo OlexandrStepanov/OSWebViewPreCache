@@ -39,30 +39,35 @@
         [self.loadingWheel startAnimating];
         if (self.reloadEnabled)
         {
+            id __weak weakSelf = self;
             [self.webView loadUrlUsingCache:self.urlToLoad withReloadRequiredBlock:^(UIWebView *webView, UIWebViewPreCacheReloadResultBlock resultBlock) {
                 
-                UIAlertController *alert =
-                [UIAlertController alertControllerWithTitle:NSLocalizedString(@"New version", nil)
-                                                    message:NSLocalizedString(@"There is a new version of this page available, do you want to reload it?", nil)
-                                             preferredStyle:UIAlertControllerStyleAlert];
-                
-                UIAlertAction *noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"No", nil)
-                                                                   style:UIAlertActionStyleCancel
-                                                                 handler:^(UIAlertAction * _Nonnull action) {
-                                                                     resultBlock(NO);
-                                                                     [self dismissViewControllerAnimated:YES completion:NULL];
-                                                                 }];
-                UIAlertAction *yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes", nil)
-                                                                    style:UIAlertActionStyleDefault
-                                                                  handler:^(UIAlertAction * _Nonnull action) {
-                                                                      resultBlock(YES);
-                                                                      [self dismissViewControllerAnimated:YES completion:NULL];
-                                                                  }];
-                
-                [alert addAction:noAction];
-                [alert addAction:yesAction];
-                
-                [self presentViewController:alert animated:YES completion:NULL];
+                id __strong strongSelf = weakSelf;
+                if (strongSelf)
+                {
+                    UIAlertController *alert =
+                    [UIAlertController alertControllerWithTitle:NSLocalizedString(@"New version", nil)
+                                                        message:NSLocalizedString(@"There is a new version of this page available, do you want to reload it?", nil)
+                                                 preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    UIAlertAction *noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"No", nil)
+                                                                       style:UIAlertActionStyleCancel
+                                                                     handler:^(UIAlertAction * _Nonnull action) {
+                                                                         resultBlock(NO);
+                                                                         [weakSelf dismissViewControllerAnimated:YES completion:NULL];
+                                                                     }];
+                    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes", nil)
+                                                                        style:UIAlertActionStyleDefault
+                                                                      handler:^(UIAlertAction * _Nonnull action) {
+                                                                          resultBlock(YES);
+                                                                          [weakSelf dismissViewControllerAnimated:YES completion:NULL];
+                                                                      }];
+                    
+                    [alert addAction:noAction];
+                    [alert addAction:yesAction];
+                    
+                    [strongSelf presentViewController:alert animated:YES completion:NULL];
+                }
             }];
         }
         else

@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define LOG_VERBOSE 1
+
 /**
  *  This class implements caching for web pages and resources, so they are available offline.
  *  Before displaying web page, which you would like to be shown from cache, call enableCache method

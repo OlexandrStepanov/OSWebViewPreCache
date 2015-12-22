@@ -10,6 +10,9 @@
 #import "OSWebViewPreCacher.h"
 #import "OSURLCache.h"
 
+#if !LOG_VERBOSE
+    #define NSLog(...)
+#endif
 
 #define kReloadNumberOfTries 2
 #define kReloadTimeInterval 1.0
