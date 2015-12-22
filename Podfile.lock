@@ -1,13 +1,10 @@
 PODS:
   - Reachability (3.2)
-  - UIAlertController+Blocks (0.9)
 
 DEPENDENCIES:
   - Reachability (~> 3.2)
-  - UIAlertController+Blocks (~> 0.9)
 
 SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  UIAlertController+Blocks: b48c673ff60726da468b32ab21bbc7683512d45b
 
 COCOAPODS: 0.39.0

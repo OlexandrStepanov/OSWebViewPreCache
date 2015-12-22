@@ -8,7 +8,6 @@
 
 #import "OSWebViewController.h"
 #import "UIWebView+PreCache.h"
-#import "UIAlertController+Blocks.h"
 
 @interface OSWebViewController () <UIWebViewDelegate>
 
@@ -41,16 +40,29 @@
         if (self.reloadEnabled)
         {
             [self.webView loadUrlUsingCache:self.urlToLoad withReloadRequiredBlock:^(UIWebView *webView, UIWebViewPreCacheReloadResultBlock resultBlock) {
-                [UIAlertController showAlertInViewController:self
-                                                   withTitle:NSLocalizedString(@"New version", nil)
-                                                     message:NSLocalizedString(@"There is a new version of this page available, do you want to reload it?", nil)
-                                           cancelButtonTitle:NSLocalizedString(@"No", nil)
-                                      destructiveButtonTitle:nil
-                                           otherButtonTitles:@[NSLocalizedString(@"Yes", nil)]
-                                                    tapBlock:
-                 ^(UIAlertController * _Nonnull controller, UIAlertAction * _Nonnull action, NSInteger buttonIndex) {
-                    resultBlock(action.style != UIAlertActionStyleCancel);
-                }];
+                
+                UIAlertController *alert =
+                [UIAlertController alertControllerWithTitle:NSLocalizedString(@"New version", nil)
+                                                    message:NSLocalizedString(@"There is a new version of this page available, do you want to reload it?", nil)
+                                             preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction *noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"No", nil)
+                                                                   style:UIAlertActionStyleCancel
+                                                                 handler:^(UIAlertAction * _Nonnull action) {
+                                                                     resultBlock(NO);
+                                                                     [self dismissViewControllerAnimated:YES completion:NULL];
+                                                                 }];
+                UIAlertAction *yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes", nil)
+                                                                    style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction * _Nonnull action) {
+                                                                      resultBlock(YES);
+                                                                      [self dismissViewControllerAnimated:YES completion:NULL];
+                                                                  }];
+                
+                [alert addAction:noAction];
+                [alert addAction:yesAction];
+                
+                [self presentViewController:alert animated:YES completion:NULL];
             }];
         }
         else
