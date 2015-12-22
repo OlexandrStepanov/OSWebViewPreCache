@@ -1,7 +1,7 @@
 PODS:
   - Kiwi (2.4.0)
   - OSWebViewPreCache (1.0):
-    - Reachability (~> 3.2)
+    - Reachability
   - Reachability (3.2)
 
 DEPENDENCIES:
@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
-  OSWebViewPreCache: 837bbbfc12276b0cfb1c03c7ea765c1b9f9ca963
+  OSWebViewPreCache: ad3eaf9b1f84953de53ddbd05e6c734f9d4bd08d
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
 
 COCOAPODS: 0.39.0
