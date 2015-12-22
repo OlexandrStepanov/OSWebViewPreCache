@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VO3-eO-SRL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VO3-eO-SRL">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -18,7 +18,8 @@
         <scene sceneID="USv-Fj-xTF">
             <objects>
                 <navigationController id="VO3-eO-SRL" sceneMemberID="viewController">
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="RND-26-dfu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -155,12 +156,12 @@
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="Xjk-Pf-WsC"/>
-                                                            <exclude reference="LQZ-mC-A3j"/>
-                                                            <exclude reference="cli-1k-ifF"/>
-                                                            <exclude reference="PaA-Qa-zuJ"/>
                                                             <exclude reference="HaK-hH-fEZ"/>
+                                                            <exclude reference="LQZ-mC-A3j"/>
+                                                            <exclude reference="PaA-Qa-zuJ"/>
                                                             <exclude reference="Sd7-bg-UFg"/>
+                                                            <exclude reference="Xjk-Pf-WsC"/>
+                                                            <exclude reference="cli-1k-ifF"/>
                                                         </mask>
                                                     </variation>
                                                 </label>
@@ -175,8 +176,8 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="ws1-UE-B9f"/>
                                                     <exclude reference="wPM-Cw-dIQ"/>
+                                                    <exclude reference="ws1-UE-B9f"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -193,7 +194,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="OSURLCacheExample" id="IDh-Vw-Svn"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j5J-ym-00g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -234,7 +234,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="WebView" id="HoN-XB-QNN"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="loadingWheel" destination="FeA-Dy-zss" id="gHQ-7o-bNp"/>
                         <outlet property="webView" destination="u3a-qg-GDX" id="ZFe-Aj-1Yc"/>

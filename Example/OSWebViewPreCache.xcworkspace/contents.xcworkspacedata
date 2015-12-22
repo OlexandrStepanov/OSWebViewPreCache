@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:OSWebViewPreCacheSample/OSWebViewPreCacheSample.xcodeproj">
+      location = "group:OSWebViewPreCache.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

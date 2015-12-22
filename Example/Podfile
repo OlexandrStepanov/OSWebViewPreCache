@@ -1,0 +1,15 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'OSWebViewPreCache_Example', :exclusive => true do
+  pod "OSWebViewPreCache", :path => "../"
+  
+  pod 'Reachability', '~> 3.2'
+  
+end
+
+target 'OSWebViewPreCache_Tests', :exclusive => true do
+  pod "OSWebViewPreCache", :path => "../"
+  
+  pod 'Kiwi'
+end
