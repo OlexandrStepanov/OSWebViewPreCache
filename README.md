@@ -13,7 +13,7 @@
 
 * iOS 8.0+
 * ARC
-* XCode 6+
+* Xcode 6+
  
 ### Dependencies
 
@@ -66,7 +66,7 @@ To make your web pages accessible when device offline even without loading it on
     * On device set 'UIFileSharingEnabled' key to YES in the Info.plist, and access Documents from the iTunes
     * On Simulator the one can navigate to the Documents folder via Finder. Use next folder as start point:     ~/Library/Developer/CoreSimulator/Devices/
 
- * Add the 'WebCache' folder to your project as reference (note, that it should have blue icon in XCode then)
+ * Add the 'WebCache' folder to your project as reference (note, that it should have blue icon in Xcode then)
 
 ## License
 
